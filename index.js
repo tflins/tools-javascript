@@ -43,3 +43,40 @@ export const importAll = (
 // 补充位数
 export const padStartNum = (str, num = 2, val = 0) =>
   String(str).padStart(num, val)
+
+// 空函数
+export const noop = () => {}
+
+// 绑定事件
+export const on = (function () {
+  if (!isServer && document.addEventListener) {
+    return function (element, event, handler) {
+      if (element && event && handler) {
+        element.addEventListener(event, handler, false)
+      }
+    }
+  } else {
+    return function (element, event, handler) {
+      if (element && event && handler) {
+        element.attachEvent('on' + event, handler)
+      }
+    }
+  }
+})()
+
+// 解绑事件
+export const off = (function () {
+  if (!isServer && document.removeEventListener) {
+    return function (element, event, handler) {
+      if (element && event) {
+        element.removeEventListener(event, handler, false)
+      }
+    }
+  } else {
+    return function (element, event, handler) {
+      if (element && event) {
+        element.detachEvent('on' + event, handler)
+      }
+    }
+  }
+})()
