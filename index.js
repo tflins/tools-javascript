@@ -49,7 +49,7 @@ export const noop = () => {}
 
 // 绑定事件
 export const on = (function () {
-  if (!isServer && document.addEventListener) {
+  if (window && document.addEventListener) {
     return function (element, event, handler) {
       if (element && event && handler) {
         element.addEventListener(event, handler, false)
@@ -66,7 +66,7 @@ export const on = (function () {
 
 // 解绑事件
 export const off = (function () {
-  if (!isServer && document.removeEventListener) {
+  if (window && document.removeEventListener) {
     return function (element, event, handler) {
       if (element && event) {
         element.removeEventListener(event, handler, false)
