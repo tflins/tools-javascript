@@ -80,3 +80,14 @@ export const off = (function () {
     }
   }
 })()
+
+// 只触发一次
+export const once = function (el, event, fn) {
+  var listener = function () {
+    if (fn) {
+      fn.apply(this, arguments)
+    }
+    off(el, event, listener)
+  }
+  on(el, event, listener)
+}
