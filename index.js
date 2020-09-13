@@ -148,3 +148,7 @@ export function removeClass(el, cls) {
     el.className = trim(curClass)
   }
 }
+
+export function isHtmlElement(node) {
+  return node && node.nodeType === Node.ELEMENT_NODE;
+}
